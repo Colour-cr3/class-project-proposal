@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Patrick O’Connor — Photography Portfolio</title>
+  <meta name="description" content="The photography portfolio of Patrick O’Connor: landscapes, portraits, and night scenes." />
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="Patrick O’Connor — Photography" />
+  <meta property="og:description" content="Landscapes, portraits, and night scenes." />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#111111" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <style>
+    /* ====== Base / Reset ====== */
+  :root {
+    --bg: #ffffff;
+    --text: #111111;
+    --muted: #5f6368;
+    --card: #f5f5f7;
+    --accent: #0071e3;
+    --ring: rgba(0,113,227,0.25);
+    --border: #e6e6e6;
+    --shadow: 0 10px 30px rgba(0,0,0,.08);
+  }
+  /* Default to system-dark if no forced theme is set */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme]) {
+      --bg:#111113;
+      --text:#f5f5f7;
+      --muted:#a5a7ac;
+      --card:#1c1c1f;
+      --border:#2a2a2e;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  /* Force LIGHT mode */
+    :root[data-theme="light"] {
+      --bg:#ffffff;
+      --text:#111111;
+      --muted:#5f6368;
+      --card:#f5f5f7;
+      --border:#e6e6e6;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+  /* Force DARK mode */
+    :root[data-theme="dark"] {
+      --bg:#111113;
+      --text:#f5f5f7;
+      --muted:#a5a7ac;
+      --card:#1c1c1f;
+      --border:#2a2a2e;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+html, body {
+  height: 100%;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+a:focus {
+  outline: 3px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+    /* ====== Layout ====== */
+    .container { width: min(1100px, 92%); margin: 0 auto; }
+    header.site { position: sticky; top: 0; z-index: 50; backdrop-filter: saturate(180%) blur(10px); background: color-mix(in srgb, var(--bg) 85%, transparent); border-bottom: 1px solid var(--border); }
+    .nav { display:flex; align-items:center; justify-content:space-between; padding: 14px 0; gap: 12px; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px; }
+    .brand .logo { width:28px; height:28px; border-radius:7px; background: linear-gradient(135deg, var(--accent), #67b8ff); box-shadow: var(--shadow); }
+    .navlinks { display:flex; gap:18px; align-items:center; flex-wrap: wrap; }
+    .navlinks a { color:inherit; opacity:.86; padding:8px 10px; border-radius:10px; }
+    .navlinks a:hover { background: var(--card); }
+
+    .theme-toggle { border:1px solid var(--border); background:var(--bg); padding:8px 12px; border-radius:10px; cursor:pointer; display:inline-flex; align-items:center; gap:8px; }
+    .theme-toggle:hover { box-shadow: var(--shadow); }
+
+    /* ====== Hero ====== */
+    .hero { display:grid; grid-template-columns: 1.2fr 1fr; gap:28px; align-items:center; padding: 48px 0 28px; }
+    @media (max-width: 860px){ .hero{ grid-template-columns:1fr; } }
+    .hero h1 { font-size: clamp(32px, 6vw, 56px); line-height:1.1; margin:0 0 12px; }
+    .hero p { margin: 0 0 22px; color: var(--muted); }
+    .cta { display:flex; gap:12px; flex-wrap:wrap; }
+    .btn { padding:12px 16px; border-radius:12px; border:1px solid var(--border); background:var(--bg); cursor:pointer; font-weight:600; }
+    .btn.primary { background: var(--accent); color:white; border-color: color-mix(in srgb, var(--accent) 80%, black); }
+    .btn:hover { box-shadow: var(--shadow); }
+    .hero-figure { position: relative; border-radius: 16px; overflow: hidden; background: var(--card); box-shadow: var(--shadow); }
+    .hero-figure img { width:100%; height: 100%; display:block; object-fit: cover; aspect-ratio: 16 / 10; }
+
+    /* ====== Sections ====== */
+    section { padding: 48px 0; }
+    .section-head { display:flex; align-items:end; justify-content:space-between; gap:16px; margin-bottom: 20px; }
+    .section-head h2 { font-size: clamp(22px, 4vw, 34px); margin:0; }
+    .muted { color: var(--muted); }
+
+    /* ====== Gallery ====== */
+    .grid { display:grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+    .card { grid-column: span 4; background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: clip; box-shadow: var(--shadow); transition: transform .2s ease; }
+    .card:hover { transform: translateY(-2px); }
+    .card img { width:100%; height:100%; display:block; object-fit:cover; aspect-ratio: 4/3; }
+    .card figcaption { padding: 10px 12px; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+    .chip { font-size: 12px; padding: 4px 8px; border-radius: 999px; background: var(--bg); border: 1px solid var(--border); }
+    @media (max-width: 1000px){ .card{ grid-column: span 6; } }
+    @media (max-width: 640px){ .card{ grid-column: span 12; } }
+
+    /* ====== Lightbox ====== */
+    dialog.lightbox { width: min(1200px, 92vw); max-height: 92vh; padding:0; border:none; border-radius:16px; background: var(--bg); box-shadow: 0 20px 60px rgba(0,0,0,.35); }
+    .lb-wrap { position:relative; display:grid; grid-template-rows: auto 1fr auto; }
+    .lb-toolbar { display:flex; align-items:center; justify-content:space-between; padding:10px 12px; border-bottom:1px solid var(--border); gap:12px; }
+    .lb-image { position:relative; background: #000; }
+    .lb-image img { display:block; width:100%; height:auto; max-height: min(78vh, 100%); object-fit: contain; margin-inline:auto; }
+    .lb-caption { padding:12px; color: var(--muted); display:flex; align-items:center; justify-content:space-between; gap:8px; border-top:1px solid var(--border); }
+    .iconbtn { border:1px solid var(--border); background:var(--bg); border-radius:10px; padding:8px; display:inline-flex; align-items:center; gap:8px; cursor:pointer; }
+    .iconbtn:hover { box-shadow: var(--shadow); }
+    dialog::backdrop { background: rgba(0,0,0,.5); }
+
+    /* ====== About / Services ====== */
+    .split { display:grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    @media (max-width: 860px){ .split{ grid-template-columns:1fr; } }
+    .card.soft { padding:18px; }
+    ul.clean { margin:0; padding-left: 18px; }
+
+    /* ====== Contact ====== */
+    form { display:grid; gap:12px; }
+    .field { display:grid; gap:6px; }
+    .field input,.field textarea { background: var(--bg); border:1px solid var(--border); padding:12px 14px; border-radius:12px; color:inherit; }
+    .field input:focus,.field textarea:focus { outline:3px solid var(--ring); }
+    textarea { min-height: 120px; resize: vertical; }
+
+    /* ====== Footer ====== */
+    footer { border-top: 1px solid var(--border); padding: 22px 0 32px; color: var(--muted); }
+
+    /* ====== Utility ====== */
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0 }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="container nav" role="navigation" aria-label="Main">
+      <a class="brand" href="#top" aria-label="Home">
+        <span class="logo" aria-hidden="true"></span>
+        <span>Patrick O’Connor</span>
+      </a>
+      <nav class="navlinks">
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v2m0 14v2m9-9h-2M5 12H3m15.364-6.364-1.414 1.414M7.05 16.95l-1.414 1.414m12.728 0-1.414-1.414M7.05 7.05 5.636 5.636"/></svg>
+          Theme
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <!-- Hero -->
+    <section class="hero" aria-label="Intro">
+      <div>
+        <h1>Photography that feels like a memory you haven’t made yet.</h1>
+        <p>Chicago‑based photographer focused on clean color, honest light, and stories that breathe. Available for portraits, editorial, and commercial projects.</p>
+        <div class="cta">
+          <a class="btn primary" href="#work">View Work</a>
+          <a class="btn" href="#contact">Book a Shoot</a>
+        </div>
+      </div>
+      <figure class="hero-figure">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1600&auto=format&fit=crop" alt="Soft light over a ridgeline at dawn" loading="eager" />
+      </figure>
+    </section>
+
+    <!-- Portfolio / Work -->
+    <section id="work" aria-labelledby="work-title">
+      <div class="section-head">
+        <h2 id="work-title">Selected Work</h2>
+        <p class="muted">Tap any image to view full size.</p>
+      </div>
+      <div class="grid">
+        <!-- Each figure can be replaced with your own files under /assets/ -->
+        <figure class="card" data-full="https://live.staticflickr.com/65535/53956965180_704ac62014_o.jpg" data-title="Plane spotting at O'Hare" data-tag="Landscape">
+          <img src="https://live.staticflickr.com/65535/53956965180_d820a6dece_k.jpg" alt="Plane spotting at O'Hare" loading="lazy" />
+          <figcaption>
+            <span>Alpine Lake</span>
+            <span class="chip">Landscape</span>
+          </figcaption>
+        </figure>
+        <figure class="card" data-full="https://images.unsplash.com/photo-1545996124-0501ebae84d4?q=80&w=2400&auto=format&fit=crop" data-title="Candid portrait in window light" data-tag="Portrait">
+          <img src="https://images.unsplash.com/photo-1545996124-0501ebae84d4?q=80&w=900&auto=format&fit=crop" alt="Candid portrait in window light" loading="lazy" />
+          <figcaption>
+            <span>Window Light</span>
+            <span class="chip">Portrait</span>
+          </figcaption>
+        </figure>
+        <figure class="card" data-full="https://live.staticflickr.com/65535/54801240424_ec916d1342_o.jpg" data-title="Lewis Student Senate" data-tag="Portrait">
+          <img src="https://live.staticflickr.com/65535/54801240424_21a65e4d5f_k.jpg" alt="Lewis Student Senate" loading="lazy" />
+          <figcaption>
+            <span>Dust Road</span>
+            <span class="chip">Editorial</span>
+          </figcaption>
+        </figure>
+        <figure class="card" data-full="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=2400&auto=format&fit=crop" data-title="Night city crosswalk" data-tag="Street">
+          <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=900&auto=format&fit=crop" alt="Night city crosswalk" loading="lazy" />
+          <figcaption>
+            <span>Crosswalk</span>
+            <span class="chip">Street</span>
+          </figcaption>
+        </figure>
+        <figure class="card" data-full="https://images.unsplash.com/photo-1526178613406-0d7cb1d79ef3?q=80&w=2400&auto=format&fit=crop" data-title="Star trails over pines" data-tag="Night">
+          <img src="https://images.unsplash.com/photo-1526178613406-0d7cb1d79ef3?q=80&w=900&auto=format&fit=crop" alt="Star trails over pines" loading="lazy" />
+          <figcaption>
+            <span>Star Trails</span>
+            <span class="chip">Night</span>
+          </figcaption>
+        </figure>
+        <figure class="card" data-full="https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=2400&auto=format&fit=crop" data-title="Rainy neon reflections" data-tag="Commercial">
+          <img src="https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=900&auto=format&fit=crop" alt="Rainy neon reflections" loading="lazy" />
+          <figcaption>
+            <span>Neon Rain</span>
+            <span class="chip">Commercial</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- Lightbox dialog -->
+      <dialog id="lightbox" class="lightbox" aria-label="Image viewer" aria-modal="true">
+        <div class="lb-wrap">
+          <div class="lb-toolbar">
+            <span id="lbTitle">Title</span>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <a id="lbDownload" class="iconbtn" href="#" download>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+                <span class="sr-only">Download full image</span>
+              </a>
+              <button class="iconbtn" id="lbClose" type="button" aria-label="Close viewer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                Close
+              </button>
+            </div>
+          </div>
+          <div class="lb-image"><img id="lbImg" alt="" /></div>
+          <div class="lb-caption">
+            <span id="lbMeta" class="muted">&nbsp;</span>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <button class="iconbtn" id="prevBtn" type="button" aria-label="Previous image">⟵</button>
+              <button class="iconbtn" id="nextBtn" type="button" aria-label="Next image">⟶</button>
+            </div>
+          </div>
+        </div>
+      </dialog>
+    </section>
+
+    <!-- About / Services -->
+    <section id="about" aria-labelledby="about-title">
+      <div class="section-head">
+        <h2 id="about-title">About</h2>
+      </div>
+      <div class="split">
+        <article class="card soft">
+          <h3>Hi, I’m Patrick.</h3>
+          <p>I make images that keep their breath. I lean on natural light, minimal color grading, and crisp composition. When I’m not shooting, I’m hiking, tinkering with web projects, and drinking coffee I pretend is better than it is.</p>
+          <p class="muted">Tools: Canon R6 Mark II • Canon RF 24–105mm f/4L • Tamron EF 70–200mm f/2.8 G2 • Adobe Lightroom</p>
+        </article>
+        <aside class="card soft" id="services" aria-labelledby="services-title">
+          <h3 id="services-title">Services</h3>
+          <ul class="clean">
+            <li>Portraits & Headshots</li>
+            <li>Editorial Assignments</li>
+            <li>Commercial/Lifestyle Campaigns</li>
+            <li>Event Coverage</li>
+            <li>Prints and Licensing</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" aria-labelledby="contact-title">
+      <div class="section-head">
+        <h2 id="contact-title">Contact</h2>
+        <p class="muted">For bookings and inquiries, send a note. I reply within 24 hours.</p>
+      </div>
+      <!-- Simple mailto fallback. For form backends (Netlify, Formspree), add their attributes. -->
+      <form action="mailto:speedwizard@icloud.com" method="post" enctype="text/plain">
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@domain.com" required autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell me about your project…" required></textarea>
+        </div>
+        <button class="btn primary" type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap: wrap;">
+        <small>© <span id="year"></span> Patrick O’Connor. All rights reserved.</small>
+        <div style="display:flex; gap:12px; align-items:center;">
+          <a href="https://www.instagram.com/pat_ocnr"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Instagram">Instagram</a>
+          <a href="https://www.facebook.com/patrick.oconnor.3110567/"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Facebook">Facebook</a>
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== Theme toggle with prefers-color-scheme + localStorage =====
+    (function(){
+      const key = 'theme';
+      const btn = document.getElementById('themeToggle');
+      const stored = localStorage.getItem(key);
+      if (stored) document.documentElement.dataset.theme = stored;
+      const apply = () => {
+        const t = document.documentElement.dataset.theme;
+        const isDark = t ? t === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.style.colorScheme = isDark ? 'dark' : 'light';
+        btn.setAttribute('aria-pressed', String(isDark));
+      };
+      btn.addEventListener('click', () => {
+        const cur = document.documentElement.dataset.theme;
+        const next = (cur === 'dark') ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('theme', next);
+        document.documentElement.style.colorScheme = next;
+      });
+      apply();
+    })();
+
+    // ===== Lightbox for gallery =====
+    (function(){
+      const cards = Array.from(document.querySelectorAll('figure.card'));
+      const dialog = document.getElementById('lightbox');
+      const lbImg = document.getElementById('lbImg');
+      const lbTitle = document.getElementById('lbTitle');
+      const lbMeta = document.getElementById('lbMeta');
+      const dl = document.getElementById('lbDownload');
+      const prev = document.getElementById('prevBtn');
+      const next = document.getElementById('nextBtn');
+      const close = document.getElementById('lbClose');
+      let index = 0;
+
+      function show(i){
+        index = (i + cards.length) % cards.length;
+        const el = cards[index];
+        const full = el.getAttribute('data-full');
+        const title = el.getAttribute('data-title');
+        const tag = el.getAttribute('data-tag');
+        lbImg.src = full;
+        lbImg.alt = title;
+        lbTitle.textContent = title;
+        lbMeta.textContent = tag;
+        dl.href = full;
+        if (!dialog.open) dialog.showModal();
+      }
+
+      cards.forEach((el,i)=>{
+        el.addEventListener('click', ()=> show(i));
+        el.addEventListener('keypress', (e)=>{ if(e.key==='Enter') show(i); });
+        el.setAttribute('tabindex','0');
+        el.setAttribute('role','button');
+        el.setAttribute('aria-label','Open image viewer');
+      });
+
+      prev.addEventListener('click', ()=> show(index-1));
+      next.addEventListener('click', ()=> show(index+1));
+      close.addEventListener('click', ()=> dialog.close());
+      dialog.addEventListener('click', (e)=>{ if(e.target===dialog) dialog.close(); });
+      document.addEventListener('keydown', (e)=>{
+        if(!dialog.open) return;
+        if(e.key==='Escape') dialog.close();
+        if(e.key==='ArrowLeft') show(index-1);
+        if(e.key==='ArrowRight') show(index+1);
+      });
+    })();
+
+    // Year stamp
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
