@@ -1,4 +1,4 @@
-# Class Project
+# Class Project Proposal
 
 By: Patrick O'Connor
 
